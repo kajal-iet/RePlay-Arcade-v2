@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from games.bagels.routes import router as bagels_router
 from games.birthday.routes import router as birthday_router   # 👈 add this
+from games.bitmap.routes import router as bitmap_router
+
 
 app = FastAPI()
 
@@ -18,3 +20,4 @@ app.add_middleware(
 # Register all game routes
 app.include_router(bagels_router)
 app.include_router(birthday_router)   # 👈 add this
+app.include_router(bitmap_router)
