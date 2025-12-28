@@ -1,32 +1,25 @@
-# SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-# def translate(message: str, key: int, mode: str) -> str:
-#     message = message.upper()
-#     result = ""
+def caesar_translate(message: str, key: int, mode: str) -> str:
+    message = message.upper()
+    translated = ''
 
-#     for char in message:
-#         if char in SYMBOLS:
-#             index = SYMBOLS.index(char)
+    for symbol in message:
+        if symbol in SYMBOLS:
+            num = SYMBOLS.find(symbol)
 
-#             if mode == "encrypt":
-#                 index += key
-#             else:  # decrypt
-#                 index -= key
+            if mode == 'encrypt':
+                num += key
+            else:
+                num -= key
 
-#             index %= len(SYMBOLS)
-#             result += SYMBOLS[index]
-#         else:
-#             result += char
+            if num >= len(SYMBOLS):
+                num -= len(SYMBOLS)
+            elif num < 0:
+                num += len(SYMBOLS)
 
-#     return result
+            translated += SYMBOLS[num]
+        else:
+            translated += symbol
 
-
-# def hack(message: str):
-#     results = []
-#     for k in range(26):
-#         decrypted = translate(message, k, "decrypt")
-#         results.append({
-#             "key": k,
-#             "text": decrypted
-#         })
-#     return results
+    return translated
