@@ -16,6 +16,7 @@ from games.timer.routes import router as timer_router
 from games.diamonds.routes import router as diamonds_router
 from games.dicemath.routes import router as dicemath_router
 from games.diceroller.routes import router as diceroller_router
+from games.matrix.routes import router as matrix_router
 
 app = FastAPI()
 
@@ -44,4 +45,5 @@ app.include_router(timer_router)
 app.include_router(diamonds_router)
 app.include_router(dicemath_router)
 app.include_router(diceroller_router)
+app.include_router(matrix_router)
 
