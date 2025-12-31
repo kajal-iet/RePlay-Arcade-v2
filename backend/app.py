@@ -18,6 +18,8 @@ from games.dicemath.routes import router as dicemath_router
 from games.diceroller.routes import router as diceroller_router
 from games.matrix.routes import router as matrix_router
 from games.ducklings.routes import router as ducklings_router
+from games.etching.routes import router as etching_router
+from games.factors.routes import router as factors_router
 
 app = FastAPI()
 
@@ -48,4 +50,6 @@ app.include_router(dicemath_router)
 app.include_router(diceroller_router)
 app.include_router(matrix_router)
 app.include_router(ducklings_router)
+app.include_router(etching_router)
+app.include_router(factors_router)
 

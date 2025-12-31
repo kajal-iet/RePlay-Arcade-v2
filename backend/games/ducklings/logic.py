@@ -1,4 +1,5 @@
-import random, datetime
+import random
+import datetime
 
 LEFT, RIGHT = 'left', 'right'
 BEADY, WIDE, HAPPY, ALOOF = 'beady', 'wide', 'happy', 'aloof'
@@ -21,14 +22,18 @@ class Duckling:
         self.eyes = BEADY if self.body == CHUBBY else random.choice([BEADY, WIDE, HAPPY, ALOOF])
 
     def head(self, hat):
-        e = {'beady':'"', 'wide':"''", 'happy':'^^', 'aloof':'``'}[self.eyes]
-        m = '>' if self.mouth==OPEN else '='
-        if self.direction==LEFT: return hat + m + e + ') '
-        return hat + ' (' + e + m
+        if self.direction == LEFT:
+            face = '>' if self.mouth == OPEN else '='
+            eye = {'beady':'"', 'wide':"''", 'happy':'^^', 'aloof':'``'}[self.eyes]
+            return f"{hat}{face}{eye})"
+        else:
+            face = '<' if self.mouth == OPEN else '='
+            eye = {'beady':'"', 'wide':"''", 'happy':'^^', 'aloof':'``'}[self.eyes]
+            return f"{hat}({eye}{face}"
 
     def body_str(self):
-        w = {'out':'>','up':'^','down':'v'}[self.wing]
-        return f"( {w} )"
+        wing = {'out':'>','up':'^','down':'v'}[self.wing]
+        return f"( {wing} )"
 
     def feet(self):
         return " ^^ "
