@@ -20,6 +20,9 @@ from games.matrix.routes import router as matrix_router
 from games.ducklings.routes import router as ducklings_router
 from games.etching.routes import router as etching_router
 from games.factors.routes import router as factors_router
+from games.fibonacci.routes import router as fibonacci_router
+from games.fastdraw.routes import router as fastdraw_router
+from games.fishtank.routes import router as fishtank_router
 
 app = FastAPI()
 
@@ -52,4 +55,7 @@ app.include_router(matrix_router)
 app.include_router(ducklings_router)
 app.include_router(etching_router)
 app.include_router(factors_router)
-
+app.include_router(fibonacci_router)
+app.include_router(fastdraw_router)
+app.include_router(fastdraw_router)
+app.include_router(fishtank_router)
