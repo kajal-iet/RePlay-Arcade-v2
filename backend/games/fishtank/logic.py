@@ -1,4 +1,5 @@
 import random
+from typing import List
 
 WIDTH = 70
 HEIGHT = 25
@@ -9,20 +10,16 @@ FISH_TYPES = [
     {'right': ['>))>'], 'left': ['<[[<']},
 ]
 
-CRAB_FRAMES = ["(\\_/)", "(=\\_/)"]
-SAND_CHAR = "░"
-KELP_CHARS = ["(", ")"]
+CRAB_FRAMES = ["(\\_/)", "=(\\_/)"]
 
-def new_state():
-    return {
-        "fishes": [],
-        "crabs": [],
-        "foods": [],
-        "kelps": [],
-        "bubbles": [],
-        "bubblers": [10, 30, 55],
-        "frame": 0,
-    }
+class Tank:
+    def __init__(self):
+        self.fishes: List[dict] = []
+        self.crabs: List[dict] = []
+        self.frame: int = 0
+
+# 🔒 GLOBAL SINGLETON — PERSISTS ACROSS REQUESTS
+GAME_TANK = Tank()
 
 def generate_fish():
     f = random.choice(FISH_TYPES)
@@ -38,54 +35,37 @@ def generate_fish():
 def generate_crab():
     return {
         "x": random.randint(0, WIDTH-6),
-        "y": HEIGHT-2,
+        "y": HEIGHT - 2,
         "dir": random.choice([1, -1]),
         "frame": 0
     }
 
-def generate_kelp():
-    height = random.randint(5, 12)
-    return {
-        "x": random.randint(1, WIDTH - 2),
-        "segments": [random.choice(KELP_CHARS) for _ in range(height)]
-    }
-
-def simulate(state):
-    for fish in state["fishes"]:
-        if state["foods"]:
-            target = min(state["foods"], key=lambda f: abs(f["x"]-fish["x"]) + abs(f["y"]-fish["y"]))
-            fish["x"] += (target["x"] > fish["x"]) - (target["x"] < fish["x"])
-            fish["y"] += (target["y"] > fish["y"]) - (target["y"] < fish["y"])
-            fish["dir"] = 1 if target["x"] > fish["x"] else -1
-        elif state["frame"] % fish["speed"] == 0:
+def update():
+    for fish in GAME_TANK.fishes:
+        if GAME_TANK.frame % fish["speed"] == 0:
             fish["x"] += fish["dir"]
-            if fish["x"] <= 0 or fish["x"] >= WIDTH-4:
+            if fish["x"] <= 0 or fish["x"] >= WIDTH - 4:
                 fish["dir"] *= -1
 
-    for crab in state["crabs"]:
-        crab["x"] += crab["dir"]
-        if crab["x"] <= 0 or crab["x"] >= WIDTH-6:
-            crab["dir"] *= -1
-        crab["frame"] = (crab["frame"] + 1) % 2
+    for c in GAME_TANK.crabs:
+        c["x"] += c["dir"]
+        if c["x"] <= 0 or c["x"] >= WIDTH - 6:
+            c["dir"] *= -1
+        c["frame"] = (c["frame"] + 1) % 2
 
-    for kelp in state["kelps"]:
-        for i in range(len(kelp["segments"])):
-            if random.randint(1, 10) == 1:
-                kelp["segments"][i] = "(" if kelp["segments"][i] == ")" else ")"
+    GAME_TANK.frame += 1
 
-    for b in state["bubblers"]:
-        if random.randint(1, 6) == 1:
-            state["bubbles"].append({"x": b, "y": HEIGHT-3})
+def render():
+    grid = [[" " for _ in range(WIDTH)] for _ in range(HEIGHT)]
 
-    for bubble in state["bubbles"]:
-        bubble["y"] -= 1
+    for f in GAME_TANK.fishes:
+        char = f["right"][0] if f["dir"] == 1 else f["left"][0]
+        for i, ch in enumerate(char):
+            grid[f["y"]][f["x"] + i] = ch
 
-    state["bubbles"] = [b for b in state["bubbles"] if b["y"] > 0]
+    for c in GAME_TANK.crabs:
+        char = CRAB_FRAMES[c["frame"]]
+        for i, ch in enumerate(char):
+            grid[c["y"]][c["x"] + i] = ch
 
-    for food in state["foods"]:
-        food["y"] += 1
-
-    state["foods"] = [f for f in state["foods"] if f["y"] < HEIGHT-2]
-
-    state["frame"] += 1
-    return state
+    return "\n".join("".join(row) for row in grid)
