@@ -1,14 +1,52 @@
 import time, random
 
-def start_round():
-    wait = random.uniform(2, 4)
-    return { "wait": wait }
+class Game:
+    def __init__(self):
+        self.phase = "idle"
+        self.draw_time = None
+        self.attempts = 0
+        self.wins = 0
+        self.losses = 0
+        self.times = []
 
-def handle_click(draw_time, allowed):
-    now = time.time()
-    reaction = now - draw_time
+GAME = Game()
+
+def start_round():
+    GAME.phase = "waiting"
+    GAME.draw_time = None
+
+def trigger_draw():
+    GAME.draw_time = time.time()
+    GAME.phase = "draw"
+
+def click(allowed):
+    if GAME.phase != "draw":
+        return None
+
+    reaction = time.time() - GAME.draw_time
+    GAME.attempts += 1
 
     if reaction <= allowed:
-        return {"result": "win", "reaction": round(reaction, 4)}
+        GAME.wins += 1
+        result = "win"
     else:
-        return {"result": "lose", "reaction": round(reaction, 4)}
+        GAME.losses += 1
+        result = "lose"
+
+    GAME.times.append(reaction)
+    GAME.phase = "idle"
+    GAME.draw_time = None
+
+    return result, round(reaction, 4)
+
+def get_stats():
+    return {
+        "attempts": GAME.attempts,
+        "wins": GAME.wins,
+        "losses": GAME.losses,
+        "times": GAME.times,
+        "phase": GAME.phase
+    }
+
+def reset():
+    GAME.__init__()

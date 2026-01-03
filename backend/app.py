@@ -23,6 +23,8 @@ from games.factors.routes import router as factors_router
 from games.fibonacci.routes import router as fibonacci_router
 from games.fastdraw.routes import router as fastdraw_router
 from games.fishtank.routes import router as fishtank_router
+from games.flooder.routes import router as flooder_router
+from games.connect4.routes import router as connect4_router
 
 app = FastAPI()
 
@@ -58,4 +60,6 @@ app.include_router(factors_router)
 app.include_router(fibonacci_router)
 app.include_router(fastdraw_router)
 app.include_router(fastdraw_router)
-app.include_router(fishtank_router, prefix="/api/fishtank")
+app.include_router(fishtank_router)
+app.include_router(flooder_router)
+app.include_router(connect4_router)
