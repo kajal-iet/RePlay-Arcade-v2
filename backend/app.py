@@ -25,6 +25,11 @@ from games.fastdraw.routes import router as fastdraw_router
 from games.fishtank.routes import router as fishtank_router
 from games.flooder.routes import router as flooder_router
 from games.connect4.routes import router as connect4_router
+from games.guessnumber.routes import router as guessnumber_router
+from games.gullible.routes import router as gullible_router
+from games.hacking.routes import router as hacking_router
+from games.hangman.routes import router as hangman_router
+
 
 app = FastAPI()
 
@@ -63,3 +68,7 @@ app.include_router(fastdraw_router)
 app.include_router(fishtank_router)
 app.include_router(flooder_router)
 app.include_router(connect4_router)
+app.include_router(guessnumber_router)
+app.include_router(gullible_router)
+app.include_router(hacking_router)
+app.include_router(hangman_router)
