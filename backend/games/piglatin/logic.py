@@ -14,23 +14,6 @@ SENTENCES = [
     "Try not to cheat!", "Practice makes progress", "Never stop learning"
 ]
 
-class PigLatinGame:
-    def __init__(self):
-        self.reset()
-
-    def reset(self):
-        self.scores = [0,0]
-        self.turn = 0
-        self.new_round()
-
-    def new_round(self):
-        self.question = random.choice(SENTENCES)
-        self.answer = english_to_pig_latin(self.question)
-        self.submitted = False
-        self.correct = None
-
-GAME = PigLatinGame()
-
 def english_to_pig_latin(sentence):
     output = []
 
@@ -61,3 +44,21 @@ def english_to_pig_latin(sentence):
         output.append(prefix + pig + suffix)
 
     return " ".join(output)
+
+class PigLatinGame:
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.scores = [0,0]
+        self.turn = 0
+        self.new_round()
+
+    def new_round(self):
+        self.question = random.choice(SENTENCES)
+        self.answer = english_to_pig_latin(self.question)
+        self.submitted = False
+        self.correct = None
+
+GAME = PigLatinGame()
+

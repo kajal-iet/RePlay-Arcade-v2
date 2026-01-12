@@ -1,0 +1,14 @@
+{
+  "game": "Bagels",
+  "goal": "Guess the secret number using logical clues",
+  "rules": [
+    "Digits are unique",
+    "Correct digit & position → Fermi",
+    "Correct digit wrong position → Pico",
+    "No correct digits → Bagels"
+  ],
+  "main_functions": {
+    "generate_secret_number": "Creates the hidden number",
+    "get_clues": "Evaluates the player's guess"
+  }
+}

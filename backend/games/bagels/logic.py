@@ -7,9 +7,10 @@ def generate_secret_number(num_digits):
 
 def get_clues(guess, secret):
     if guess == secret:
-        return "WIN"
+        return "WIN", True
 
     clues = []
+
     for i in range(len(guess)):
         if guess[i] == secret[i]:
             clues.append("Fermi")
@@ -17,6 +18,7 @@ def get_clues(guess, secret):
             clues.append("Pico")
 
     if not clues:
-        return "Bagels"
+        return "Bagels", False
 
-    return " ".join(sorted(clues))
+    return " ".join(clues), False
+

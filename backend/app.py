@@ -1,38 +1,49 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from games.bagels.routes import router as bagels_router
-from games.birthday.routes import router as birthday_router   # 👈 add this
-from games.bitmap.routes import router as bitmap_router
-from games.blackjack.routes import router as blackjack_router
-from games.dvd.routes import router as dvd_router
-from games.caesar.routes import router as caesar_router
-from games.calendar.routes import router as calendar_router
-from games.carrot.routes import router as carrot_router
-from games.chohan.routes import router as chohan_router
-from games.clickbait.routes import router as clickbait_router
-from games.collatz.routes import router as collatz_router
-from games.timer.routes import router as timer_router
-from games.diamonds.routes import router as diamonds_router
-from games.dicemath.routes import router as dicemath_router
-from games.diceroller.routes import router as diceroller_router
-from games.matrix.routes import router as matrix_router
-from games.ducklings.routes import router as ducklings_router
-from games.etching.routes import router as etching_router
-from games.factors.routes import router as factors_router
-from games.fibonacci.routes import router as fibonacci_router
-from games.fastdraw.routes import router as fastdraw_router
-from games.fishtank.routes import router as fishtank_router
-from games.flooder.routes import router as flooder_router
-from games.connect4.routes import router as connect4_router
-from games.guessnumber.routes import router as guessnumber_router
-from games.gullible.routes import router as gullible_router
-from games.hacking.routes import router as hacking_router
-from games.hangman.routes import router as hangman_router
-from games.pattern_carpet.routes import router as pattern_carpet_router
-from games.hourglass.routes import router as hourglass_router
-from games.robots.routes import router as robots_router
-from games.piglatin.routes import router as piglatin_router
+from backend.games.bagels.routes import router as bagels_router
+from backend.games.birthday.routes import router as birthday_router   # 👈 add this
+from backend.games.bitmap.routes import router as bitmap_router
+from backend.games.blackjack.routes import router as blackjack_router
+from backend.games.dvd.routes import router as dvd_router
+from backend.games.caesar.routes import router as caesar_router
+from backend.games.calendar.routes import router as calendar_router
+from backend.games.carrot.routes import router as carrot_router
+from backend.games.chohan.routes import router as chohan_router
+from backend.games.clickbait.routes import router as clickbait_router
+from backend.games.collatz.routes import router as collatz_router
+from backend.games.timer.routes import router as timer_router
+from backend.games.diamonds.routes import router as diamonds_router
+from backend.games.dicemath.routes import router as dicemath_router
+from backend.games.diceroller.routes import router as diceroller_router
+from backend.games.matrix.routes import router as matrix_router
+from backend.games.ducklings.routes import router as ducklings_router
+from backend.games.etching.routes import router as etching_router
+from backend.games.factors.routes import router as factors_router
+from backend.games.fibonacci.routes import router as fibonacci_router
+from backend.games.fastdraw.routes import router as fastdraw_router
+from backend.games.fishtank.routes import router as fishtank_router
+from backend.games.flooder.routes import router as flooder_router
+from backend.games.connect4.routes import router as connect4_router
+from backend.games.guessnumber.routes import router as guessnumber_router
+from backend.games.gullible.routes import router as gullible_router
+from backend.games.hacking.routes import router as hacking_router
+from backend.games.hangman.routes import router as hangman_router
+from backend.games.pattern_carpet.routes import router as pattern_carpet_router
+from backend.games.hourglass.routes import router as hourglass_router
+# from games.robots.routes import router as robots_router
+from backend.games.piglatin.routes import router as piglatin_router
+from backend.games.bagels.guide import router as bagels_guide_router
+
+from fastapi.middleware.cors import CORSMiddleware
+
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+
+print("KEY PRESENT:", bool(os.getenv("GOOGLE_API_KEY")))
+
 
 app = FastAPI()
 
@@ -77,5 +88,6 @@ app.include_router(hacking_router)
 app.include_router(hangman_router)
 app.include_router(pattern_carpet_router)
 app.include_router(hourglass_router)
-app.include_router(robots_router)
+# app.include_router(robots_router)
 app.include_router(piglatin_router)
+app.include_router(bagels_guide_router)
