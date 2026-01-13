@@ -1,15 +1,12 @@
 import json
 from pathlib import Path
 from fastapi import APIRouter, Request
-from backend.ai.adk_client import create_game_guide_agent
+from backend.ai.llm_client import get_llm
 from backend.knowledge.retriever import retrieve_context
 from backend.ai.session_store import store
 from uuid import uuid4
 
-
-
 router = APIRouter(prefix="/bagels/guide")
-
 BASE = Path(__file__).parent
 
 def load_context():
@@ -42,22 +39,33 @@ async def chat(request: Request):
 
     history = store.get(session_id)
     relevant_code = retrieve_context(user_msg)
-
     context = load_context()
 
     full_context = f"""
-        {context}
+{context}
 
-        RELEVANT PROJECT CODE:
-        {relevant_code}
+RELEVANT PROJECT CODE:
+{relevant_code}
 
-        CONVERSATION SO FAR:
-        {history}
-        """
+CONVERSATION SO FAR:
+{history}
+"""
 
-    agent = create_game_guide_agent(full_context)
-    response = agent.generate(user_msg)
+    llm = get_llm()
 
-    store.add(session_id, "ai", response.text)
+    prompt = f"""
+You are GameGuide, an expert AI mentor.
 
-    return {"reply": response.text, "session": session_id}
+Use the following context to help the user understand the game,
+explain code, and suggest improvements.
+
+{full_context}
+
+User: {user_msg}
+"""
+
+    response = llm.invoke(prompt)
+
+    store.add(session_id, "ai", response)
+
+    return {"reply": response, "session": session_id}
