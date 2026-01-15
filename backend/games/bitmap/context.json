@@ -1,0 +1,15 @@
+{
+  "game": "Bitmap",
+  "goal": "Draw pixel images using a 2D grid",
+  "main_functions": {
+    "update_pixel": "Toggles a pixel value",
+    "reset_bitmap": "Clears the grid",
+    "render_bitmap": "Converts bitmap to displayable form"
+  },
+  "concepts": [
+    "2D arrays",
+    "state management",
+    "grid rendering",
+    "user interaction"
+  ]
+}
