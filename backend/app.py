@@ -34,6 +34,8 @@ from backend.games.hourglass.routes import router as hourglass_router
 # from games.robots.routes import router as robots_router
 from backend.games.piglatin.routes import router as piglatin_router
 from backend.games.bagels.guide import router as bagels_guide_router
+from backend.games.birthday.guide import router as birthday_guide_router
+
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -91,3 +93,4 @@ app.include_router(hourglass_router)
 # app.include_router(robots_router)
 app.include_router(piglatin_router)
 app.include_router(bagels_guide_router)
+app.include_router(birthday_guide_router)

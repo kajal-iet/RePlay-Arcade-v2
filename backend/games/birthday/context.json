@@ -1,0 +1,15 @@
+{
+  "game": "Birthday Paradox",
+  "goal": "Show probability of shared birthdays in a group",
+  "main_functions": {
+    "getBirthdays": "Generates random birthdays",
+    "getMatch": "Detects if any two birthdays match",
+    "calculate_probabilities": "Estimates probability over group sizes"
+  },
+  "concepts": [
+    "probability",
+    "simulation",
+    "combinatorics",
+    "random sampling"
+  ]
+}
