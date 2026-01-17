@@ -62,6 +62,7 @@ Help the user understand:
 - How today is detected and highlighted,
 - How notes are stored and retrieved,
 - Why the calendar shows days from adjacent months.
+- And any other information also user will ask
 
 {full_context}
 
