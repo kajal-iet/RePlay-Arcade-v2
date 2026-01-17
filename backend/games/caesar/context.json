@@ -1,0 +1,15 @@
+{
+  "game": "Caesar Cipher",
+  "goal": "Encrypt, decrypt, and analyze shifted messages",
+  "main_functions": {
+    "caesar_translate": "Performs encryption and decryption",
+    "SYMBOLS": "Defines the valid alphabet (A-Z)"
+  },
+  "features": [
+    "Encrypt mode",
+    "Decrypt mode",
+    "Brute-force (Hacker) mode",
+    "Wrap-around shifting",
+    "Preserves non-letter characters"
+  ]
+}

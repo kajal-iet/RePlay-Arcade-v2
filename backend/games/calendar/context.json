@@ -1,0 +1,17 @@
+{
+  "game": "Smart Calendar",
+  "goal": "Display a monthly calendar and allow users to save notes",
+  "main_functions": {
+    "build_calendar": "Generates a full month view with weeks and days"
+  },
+  "storage": {
+    "type": "JSON file",
+    "file": "calendar_notes.json",
+    "format": "YYYY-MM-DD -> note text"
+  },
+  "important_notes": [
+    "Calendar always aligns weeks from Sunday to Saturday",
+    "Days from adjacent months are included for layout consistency",
+    "Notes are stored server-side and persist"
+  ]
+}

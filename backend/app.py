@@ -36,6 +36,9 @@ from backend.games.piglatin.routes import router as piglatin_router
 from backend.games.bagels.guide import router as bagels_guide_router
 from backend.games.birthday.guide import router as birthday_guide_router
 from backend.games.bitmap.guide import router as bitmap_guide_router
+from backend.games.blackjack.guide import router as blackjack_guide_router
+from backend.games.caesar.guide import router as caesar_guide_router
+from backend.games.calendar.guide import router as calendar_guide_router
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -95,3 +98,8 @@ app.include_router(piglatin_router)
 app.include_router(bagels_guide_router)
 app.include_router(birthday_guide_router)
 app.include_router(bitmap_guide_router)
+app.include_router(blackjack_guide_router)
+app.include_router(caesar_guide_router)
+app.include_router(calendar_guide_router)
+
+
